@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: light --default; 
+}
+
+:root {
+  /* Brand Colors */
+  --color-primary: #632ee3;
+  --color-primary-hover: #4f23b8;
+  --color-secondary: #9f62f2;
+  --color-secondary-hover: #874ae0;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  --gradient-primary-hover: linear-gradient(135deg, var(--color-primary-hover), var(--color-secondary-hover));
+
+  /* Backgrounds */
+  --bg-primary: #f3edff;
+  --bg-secondary: #f7f3ff;
+  --bg-gradient: linear-gradient(135deg, #f3edff, #f7f3ff);
+}
+
+/* 🌈 Primary Gradient Button */
+.btn-primary {
+  background: var(--gradient-primary);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: var(--gradient-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(99, 46, 227, 0.3);
+}
+
+/* 🟣 Secondary Button */
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-secondary-hover);
+  box-shadow: 0 4px 12px rgba(159, 98, 242, 0.3);
+}
+
+/* 💫 Gradient Text (Primary → Secondary) */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* 🪄 Background Utilities */
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.bg-gradient {
+  background: var(--bg-gradient);
+}
+
