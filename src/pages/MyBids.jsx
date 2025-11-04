@@ -14,14 +14,21 @@ const MyBids = () => {
     //     bidPrice: "$10",
     //     status: "Pending",
     //   }));
+
+    console.log('token', user.accessToken);
+
     useEffect(() => {
-        fetch(`http://localhost:3000/bids?email=${user.email}`)
+        fetch(`http://localhost:3000/bids?email=${user.email}`, {
+            headers: {
+                authorization: `Bearer ${user.accessToken}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
                 setBids(data)
             })
-    }, [user?.email])
+    }, [user?.accessToken, user?.email])
 
     const handleBidDelete = id => {
         console.log(id);

@@ -62,7 +62,7 @@ const ProductDetails = () => {
                 if (data.insertedId) {
                     bidModalRef.current.close()
                     Swal.fire({
-                        position: "center-center",
+                        position: "center",
                         icon: "success",
                         title: "Your bid has been saved",
                         showConfirmButton: false,
