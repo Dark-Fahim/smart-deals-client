@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const MyBids = () => {
     const { user } = useContext(AuthContext)
     const [bids, setBids] = useState([])
+    const axiosSecure = useAxiosSecure()
     //   const bids = Array.from({ length: 10 }, (_, i) => ({
     //     id: i + 1,
     //     product: "Orange Juice",
@@ -15,20 +17,25 @@ const MyBids = () => {
     //     status: "Pending",
     //   }));
 
-    console.log('token', user.accessToken);
-
     useEffect(() => {
-        fetch(`http://localhost:3000/bids?email=${user.email}`, {
-            headers: {
-                authorization: `Bearer ${user.accessToken}`
-            }
+        axiosSecure.get(`/bids?email=${user.email}`)
+        .then(data => {
+            setBids(data.data)
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setBids(data)
-            })
-    }, [user?.accessToken, user?.email])
+    },[axiosSecure, user.email])
+
+    // useEffect(() => {
+    //     fetch(`https://smart-deals-server-three-alpha.vercel.app/bids?email=${user.email}`, {
+    //         headers: {
+    //             // authorization: `Bearer ${user.accessToken}`
+    //             authorization: `Bearer ${localStorage.getItem('token')}`
+    //         }
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setBids(data)
+    //         })
+    // }, [user?.accessToken, user?.email])
 
     const handleBidDelete = id => {
         console.log(id);
@@ -42,7 +49,7 @@ const MyBids = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/bids/${id}`, {
+                fetch(`https://smart-deals-server-three-alpha.vercel.app/bids/${id}`, {
                     method: 'DELETE',
 
                 })

@@ -14,6 +14,7 @@ import PrivateRoute from './routes/PrivateRoute.jsx';
 import MyProducts from './pages/MyProducts.jsx';
 import MyBids from './pages/MyBids.jsx';
 import ProductDetails from './pages/ProductDetails.jsx';
+import CreateProduct from './pages/CreateProduct.jsx';
 
 const router = createBrowserRouter([
   {
@@ -45,8 +46,12 @@ const router = createBrowserRouter([
         element: <PrivateRoute><MyBids></MyBids></PrivateRoute>
       },
       {
+        path: '/create-product',
+        element: <PrivateRoute><CreateProduct></CreateProduct></PrivateRoute>
+      },
+      {
         path: '/product/:id',
-        loader: ({params}) =>  fetch(`http://localhost:3000/products/${params.id}`),
+        loader: ({params}) =>  fetch(`https://smart-deals-server-three-alpha.vercel.app/products/${params.id}`),
         element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>
       }
     ]

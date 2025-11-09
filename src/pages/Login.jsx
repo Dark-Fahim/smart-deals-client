@@ -28,7 +28,7 @@ const Login = () => {
                     email: result.user.email,
                     image: result.user.photoURL
                 }
-                fetch('http://localhost:3000/users', {
+                fetch('https://smart-deals-server-three-alpha.vercel.app/users', {
                     method: "POST",
                     headers: {
                         'content-type': 'application/json'

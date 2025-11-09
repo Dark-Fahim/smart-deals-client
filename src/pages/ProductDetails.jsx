@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { useLoaderData } from "react-router";
 import AuthContext from "../context/AuthContext";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const ProductDetails = () => {
     const product = useLoaderData()
@@ -12,13 +13,20 @@ const ProductDetails = () => {
     const { title, email, price_max, price_min, category, created_at, status, location, seller_name, condition, usage, description, seller_contact, _id } = product
 
     useEffect(() => {
-        fetch(`http://localhost:3000/products/bids/${_id}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setBids(data)
-            })
+        axios.get(`https://smart-deals-server-three-alpha.vercel.app/products/bids/${_id}`)
+        .then(data => {
+            console.log("after axios get",data.data);
+            setBids(data.data)
+        })
     }, [_id])
+    // useEffect(() => {
+    //     fetch(`https://smart-deals-server-three-alpha.vercel.app/products/bids/${_id}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data);
+    //             setBids(data)
+    //         })
+    // }, [_id])
 
     // const bids = [
     //     { id: 1, product: "Orange Juice", buyer: "Sara Chen", price: "$10" },
@@ -48,7 +56,7 @@ const ProductDetails = () => {
             bid_price: bid,
             status: "pending"
         }
-        fetch('http://localhost:3000/bids', {
+        fetch('https://smart-deals-server-three-alpha.vercel.app/bids', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
